@@ -1,0 +1,38 @@
+# Polling App AI Rules
+# This file defines conventions and patterns to be followed when generating or refactoring code.
+
+rules:
+  - Folder Structure:
+      - All application routes must live under `/app/`.
+      - Each route must have its own directory with `page.tsx`.
+      - Authentication routes must be under `/app/auth/`:
+          - `/app/auth/login/page.tsx`
+          - `/app/auth/register/page.tsx`
+      - Polling-related pages must be inside `/app/polls/`.
+      - Reusable UI components must live under `/components/ui/`.
+      - Context providers must live under `/context/`.
+
+  - UI Library:
+      - Always use `shadcn/ui` components (Button, Input, Label, Card, Tabs, etc.) for UI consistency.
+      - Custom components must extend or wrap `shadcn/ui` and be placed in `/components/ui/`.
+
+  - Forms:
+      - Forms must use `react-hook-form` for state management.
+      - Validation must be handled with `zod` schemas where possible.
+      - Inputs, labels, and buttons must be from `shadcn/ui`.
+
+  - Authentication:
+      - Supabase is the source of truth for authentication.
+      - Login, registration, and session logic must use the `AuthContext` located at `@/context/AuthContext`.
+      - Any server route requiring authentication must validate against Supabase sessions.
+
+  - Database / Polls:
+      - Polls must be stored in Supabase (Postgres).
+      - API routes for polls must be created under `/app/api/polls/`.
+      - New poll forms must be placed in `/app/polls/new/page.tsx`.
+      - Poll results must be fetched and displayed in `/app/polls/[pollId]/page.tsx`.
+
+  - Coding Conventions:
+      - Use TypeScript (`.tsx` for components/pages, `.ts` for logic).
+      - Prefer async/await over `.then()`.
+      - Always use functional components and hooks (no class components).
